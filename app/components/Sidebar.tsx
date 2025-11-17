@@ -1,98 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
+import { FaYoutube } from "react-icons/fa";
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
-
-const HomeIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-    />
-  </svg>
-);
-
-const UserIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-    />
-  </svg>
-);
-
-const FolderIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-    />
-  </svg>
-);
-
-const ChartBarIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-    />
-  </svg>
-);
-
-const Cog6ToothIcon = () => (
-  <svg
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-    />
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-    />
-  </svg>
-);
-
 const XMarkIcon = () => (
   <svg
     className="h-6 w-6"
@@ -109,13 +24,38 @@ const XMarkIcon = () => (
   </svg>
 );
 
+const Turnitin: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg viewBox="0 0 120 200" className="h-6 w-6" fill="currentColor" {...props}>
+    <path d="M8.2 74.4L5.6 90.9h26.3C11.2 109.6 0 138.7 0 157.5c0 13.9 4.4 24.7 13.3 32.1 7.1 6 16.9 9.3 29.1 10.1l1.2.1V194l-.9-.2c-11.1-2.5-29.6-9.9-29.8-32.4-.1-16.8 17.2-48.2 37.2-61.4l-5.3 30.5h16.9l9.5-56-63-.1z" />
+    <path d="M24.6 0C15.9 0 8.8 7.1 8.7 15.7l-.6 44.2 9.1.1h9l.5-41.9h74.4l.5 113.5H77.8l-3.1 18.1h29.1c8.7 0 15.9-7.9 16-16.6L119.5 0H24.6z" />
+  </svg>
+);
+
 export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
+  const pathname = usePathname();
+
   const menuItems = [
-    { icon: HomeIcon, label: "Dashboard", href: "/" },
-    { icon: UserIcon, label: "Profile", href: "/profile" },
-    { icon: FolderIcon, label: "Projects", href: "/projects" },
-    { icon: ChartBarIcon, label: "Analytics", href: "/analytics" },
-    { icon: Cog6ToothIcon, label: "Settings", href: "/settings" },
+    {
+      icon: FaYoutube,
+      label: "YT Clipper AI",
+      path: "/",
+      color: "#ff1a47",
+      soon: false,
+    },
+    {
+      icon: Turnitin,
+      label: "Turnitin Check",
+      path: "./",
+      color: "",
+      soon: true,
+    },
+    {
+      icon: FaYoutube,
+      label: "Social Media",
+      path: "./",
+      color: "",
+      soon: true,
+    },
   ];
 
   return (
@@ -137,12 +77,32 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         <div className="flex h-full flex-col">
           {/* Logo Section */}
           <div className="flex h-16 items-center justify-between border-b border-zinc-200 px-6 dark:border-zinc-800">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-linear-to-br from-blue-500 to-purple-600"></div>
+            <a href="./" className="flex items-center gap-2">
+              <div className="flex items-center gap-2">
+                {/* logo: show light or dark variant based on html.dark class */}
+                <div className="h-8 w-8 relative">
+                  <Image
+                    src="/logo/logo_light.png"
+                    alt="BisaMudah"
+                    width={32}
+                    height={32}
+                    priority
+                    className="h-8 w-8 object-contain dark:hidden"
+                  />
+                  <Image
+                    src="/logo/logo_dark.png"
+                    alt="BisaMudah (dark)"
+                    width={32}
+                    height={32}
+                    priority
+                    className="hidden h-8 w-8 object-contain dark:block"
+                  />
+                </div>
+              </div>
               <span className="text-xl font-bold text-zinc-900 dark:text-white">
                 BisaMudah
               </span>
-            </div>
+            </a>
             <button
               onClick={() => setIsOpen(false)}
               className="lg:hidden text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
@@ -156,14 +116,42 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             <ul className="space-y-2">
               {menuItems.map((item) => {
                 const Icon = item.icon;
+                const iconStyles = { color: item.color, fontSize: "1.5em" };
+                const isActive = pathname === item.path;
                 return (
                   <li key={item.label}>
                     <Link
-                      href={item.href}
-                      className="flex items-center gap-3 rounded-lg px-4 py-3 text-zinc-700 transition-all hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
+                      href={item.soon ? "#" : item.path}
+                      className={`group relative flex items-center gap-3 rounded-lg px-4 py-3 transition-all ${
+                        item.soon
+                          ? "cursor-not-allowed opacity-60"
+                          : isActive
+                          ? "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
+                          : "text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
+                      }`}
+                      onClick={(e) => item.soon && e.preventDefault()}
                     >
-                      <Icon />
-                      <span className="font-medium">{item.label}</span>
+                      <div className={item.soon ? "opacity-50" : ""}>
+                        <Icon style={iconStyles} />
+                      </div>
+                      <span
+                        className={`font-medium ${
+                          item.soon ? "text-zinc-500 dark:text-zinc-500" : ""
+                        }`}
+                      >
+                        {item.label}
+                      </span>
+                      {isActive && !item.soon && (
+                        <div className="ml-auto h-2 w-2 rounded-full bg-blue-600 dark:bg-blue-400"></div>
+                      )}
+                      {item.soon && (
+                        <span className="ml-auto rounded-full bg-linear-to-r from-blue-500 to-purple-600 px-1.5 py-0.5 text-[10px] font-semibold text-white shadow-sm whitespace-nowrap">
+                          Soon
+                        </span>
+                      )}
+                      {item.soon && (
+                        <div className="absolute inset-0 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      )}
                     </Link>
                   </li>
                 );

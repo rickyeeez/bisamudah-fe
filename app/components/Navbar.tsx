@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
   setSidebarOpen: (open: boolean) => void;
@@ -90,24 +91,7 @@ export default function Navbar({ setSidebarOpen }: NavbarProps) {
           </button>
 
           {/* Theme Toggle */}
-          <button
-            className="rounded-lg p-2 text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
-            aria-label="Toggle Theme"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-              />
-            </svg>
-          </button>
+          <ThemeToggle />
 
           {/* User Menu - Desktop */}
           <button className="hidden items-center gap-2 rounded-lg p-1.5 pr-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 sm:flex">

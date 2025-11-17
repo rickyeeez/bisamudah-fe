@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import YoutubeRangePicker from "./components/YoutubePicker";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,7 +11,7 @@ export default function Home() {
     <div className="min-h-screen bg-zinc-50 dark:bg-black">
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
       <Navbar setSidebarOpen={setSidebarOpen} />
-
+      
       {/* Main Content */}
       <main className="pt-16 lg:ml-64">
         <div className="p-6 lg:p-8">
@@ -200,7 +199,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <YoutubeRangePicker videoId="a6mTYhBF-Cs" />
         </div>
       </main>
     </div>
